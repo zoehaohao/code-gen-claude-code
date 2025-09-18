@@ -1,0 +1,50 @@
+.slds-card {
+    background: var(--lwc-colorBackgroundAlt, rgb(255, 255, 255));
+    border: var(--lwc-borderWidthThin, 1px) solid var(--lwc-colorBorder, rgb(221, 219, 218));
+    border-radius: var(--lwc-borderRadiusMedium, 0.25rem);
+}
+
+.slds-card__header {
+    padding: var(--lwc-spacingSmall, 0.75rem) var(--lwc-spacingMedium, 1rem);
+    margin: 0;
+}
+
+.slds-card__body {
+    padding: var(--lwc-spacingSmall, 0.75rem) var(--lwc-spacingMedium, 1rem);
+}
+
+@media (max-width: 48em) {
+    .slds-form {
+        margin: 0;
+    }
+
+    .slds-radio_button-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .slds-button.slds-radio_button {
+        width: 100%;
+        margin: 0 0 0.5rem 0;
+    }
+
+    .slds-button.slds-radio_button:last-child {
+        margin-bottom: 0;
+    }
+
+    .slds-radio_button__label {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.slds-table {
+    box-shadow: var(--lwc-shadowSoft, 0 2px 2px 0 rgba(0, 0, 0, 0.1));
+}
+
+.slds-radio_button-group {
+    border: none;
+    border-radius: var(--lwc-borderRadiusMedium, 0.25rem);
+    display: inline-flex;
+}

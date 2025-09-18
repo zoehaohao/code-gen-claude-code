@@ -1,3 +1,94 @@
 <template>
-    
+    <div class="slds-card">
+        <div class="slds-card__header">
+            <h2 class="slds-card__header-title">ABN Lookup</h2>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-form">
+                <div class="slds-form-element slds-m-bottom_medium">
+                    <div class="slds-form-element__control">
+                        <div class="slds-radio_button-group">
+                            <span class="slds-button slds-radio_button">
+                                <input type="radio" name="searchType" id="abn" value="abn" checked={isAbnSearch} onchange={handleSearchTypeChange} />
+                                <label class="slds-radio_button__label" for="abn">
+                                    <span class="slds-radio_faux">ABN Search</span>
+                                </label>
+                            </span>
+                            <span class="slds-button slds-radio_button">
+                                <input type="radio" name="searchType" id="name" value="name" checked={isNameSearch} onchange={handleSearchTypeChange} />
+                                <label class="slds-radio_button__label" for="name">
+                                    <span class="slds-radio_faux">Name Search</span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="search-input">
+                        {searchLabel}
+                    </label>
+                    <div class="slds-form-element__control">
+                        <input type="text" id="search-input" class="slds-input"
+                               value={searchTerm}
+                               onchange={handleSearchTermChange}
+                               placeholder={searchPlaceholder} />
+                    </div>
+                    <div if:true={error} class="slds-text-color_error slds-m-top_xx-small">
+                        {error}
+                    </div>
+                </div>
+
+                <div class="slds-m-top_medium slds-grid slds-grid_align-center">
+                    <button class="slds-button slds-button_brand slds-m-right_x-small"
+                            onclick={handleSearch}
+                            disabled={isLoading}>
+                        Search
+                    </button>
+                    <button class="slds-button slds-button_neutral"
+                            onclick={clearResults}
+                            disabled={isLoading}>
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+            <div if:true={isLoading} class="slds-is-relative slds-m-top_medium">
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </div>
+
+            <div if:true={hasResults} class="slds-m-top_medium">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th scope="col">
+                                <div class="slds-truncate" title="ABN">ABN</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Business Name">Business Name</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Status">Status</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={results} for:item="result">
+                            <tr key={result.abn}>
+                                <td>
+                                    <div class="slds-truncate">{result.formattedAbn}</div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate">{result.businessName}</div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate">{result.status}</div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </template>
